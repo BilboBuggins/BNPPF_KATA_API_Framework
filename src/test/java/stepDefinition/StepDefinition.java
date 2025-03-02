@@ -104,4 +104,17 @@ public class StepDefinition extends Utility{
 
     }
 
+    @Then("Response has the correct error message {string}")
+    public void response_has_the_correct_error(String value)
+    {
+        stringResponse=response.asPrettyString();
+        JsonPath jp= new JsonPath(stringResponse);
+        capturedStringResponse=jp.get("fieldErrors").toString();
+        System.out.println(capturedStringResponse);
+        capturedStringResponse.contains(value);
+        assertEquals(capturedStringResponse,value);
+
+    }
+
+
 }
