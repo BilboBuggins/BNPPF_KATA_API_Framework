@@ -10,9 +10,12 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import resources.TestDataBuilder;
 public class StepDefinition {
     private RequestSpecification requestSpecification;
     private Response response;
+    TestDataBuilder testDataBuilder= new TestDataBuilder();
+
     @Given("User calls BaseURL {string}")
     public void user_calls_base_url(String baseurl)  {
 
@@ -25,6 +28,11 @@ public class StepDefinition {
         for(Map<String, String> pairs:data) {
             requestSpecification=requestSpecification.headers(pairs.get("Key"),pairs.get("Value"));
         }
+    }
+
+    @When("User sends post api with {string} {string} {string} {string} {string}")
+    public void user_sends_post_api_with(String name, String email, String description, String phoneno, String subject) {
+        requestSpecification=requestSpecification.body(testDataBuilder.postMessageload(description, email, name, phoneno, subject));
     }
 
     @When("User sends body as {string}")
