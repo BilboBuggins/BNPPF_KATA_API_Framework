@@ -56,20 +56,21 @@ public class StepDefinition extends Utility{
 
     @When("Using a {string} call with resources {string}")
     public void using_a_call(String call, String resources) {
+        Resource apiResource= Resource.valueOf(resources);
         if(call.equalsIgnoreCase("get")) {
-            response=requestSpecification.when().get(resources);
+            response=requestSpecification.when().get(apiResource.getResource());
         }
         else if(call.equalsIgnoreCase("post")) {
-            response=requestSpecification.when().post(resources);
+            response=requestSpecification.when().post(apiResource.getResource());
         }
         else if(call.equalsIgnoreCase("put")) {
-            response=requestSpecification.when().put(resources);
+            response=requestSpecification.when().put(apiResource.getResource());
         }
         else if(call.equalsIgnoreCase("patch")) {
-            response=requestSpecification.when().patch(resources);
+            response=requestSpecification.when().patch(apiResource.getResource());
         }
         else if(call.equalsIgnoreCase("delete")) {
-            response=requestSpecification.when().delete(resources);
+            response=requestSpecification.when().delete(apiResource.getResource());
         }
     }
 
