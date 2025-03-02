@@ -17,9 +17,10 @@ import io.cucumber.java.en.When;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import resources.TestDataBuilder;
+import resources.Utility;
 import io.restassured.path.json.JsonPath;
 
-public class StepDefinition {
+public class StepDefinition extends Utility{
     private RequestSpecification requestSpecification;
     private Response response;
     private String stringResponse;
@@ -28,10 +29,9 @@ public class StepDefinition {
     TestDataBuilder testDataBuilder= new TestDataBuilder();
 
 
-    @Given("User calls BaseURL {string}")
-    public void user_calls_base_url(String baseurl)  {
-
-        requestSpecification=given().log().all().baseUri(baseurl);
+    @Given("User calls BaseURL")
+    public void user_calls_base_url() throws IOException  {
+        requestSpecification =  given().spec(requestSpecBuilder());
     }
 
     @When("User sends headers as")
@@ -75,8 +75,7 @@ public class StepDefinition {
 
     @Then("User gets a {int} status code")
     public void user_gets_a_status_code(Integer code) {
-        response=response.then().statusCode(code).log().all().extract().response();
-
+        response=response.then().spec(responseSpecBuilder(code)).log().all().extract().response();
     }
 
     @Then("Response has a single entry with the name as {string}")

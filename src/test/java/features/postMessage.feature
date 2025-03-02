@@ -2,7 +2,7 @@ Feature: Validate Post Message Apis
 
 
     Scenario: Verify post Message Api
-        Given User calls BaseURL "https://automationintesting.online"
+        Given User calls BaseURL
         When User sends headers as
             |Key|Value|
             |Content-Type|application/json|
