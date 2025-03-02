@@ -5,6 +5,7 @@ Feature: Validate Get Message Apis
     Given User calls BaseURL "https://automationintesting.online"
     When Using a "get" call with resources "/message"
     Then User gets a 200 status code
+    And Response has a single entry with the name as "James Dean"
 
 
 
@@ -13,6 +14,7 @@ Feature: Validate Get Message Apis
     Given User calls BaseURL "https://automationintesting.online"
     When Using a "get" call with resources "/message/1"
     Then User gets a 200 status code
+    And Response has the "messageid" as "1"
 
 
 
@@ -22,3 +24,4 @@ Feature: Validate Get Message Apis
     Given User calls BaseURL "https://automationintesting.online"
     When Using a "get" call with resources "/message/count"
     Then User gets a 200 status code
+    And Response has the "count" as "4"

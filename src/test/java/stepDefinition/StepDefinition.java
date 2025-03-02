@@ -4,17 +4,29 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
+
+import body.GetMessages;
+import body.Messages;
+
 import static io.restassured.RestAssured.given;
+import static org.junit.Assert.assertEquals;
+
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import resources.TestDataBuilder;
+import io.restassured.path.json.JsonPath;
+
 public class StepDefinition {
     private RequestSpecification requestSpecification;
     private Response response;
+    private String stringResponse;
+    private String capturedStringResponse;
+    private GetMessages getMessagesclass;
     TestDataBuilder testDataBuilder= new TestDataBuilder();
+
 
     @Given("User calls BaseURL {string}")
     public void user_calls_base_url(String baseurl)  {
@@ -64,6 +76,32 @@ public class StepDefinition {
     @Then("User gets a {int} status code")
     public void user_gets_a_status_code(Integer code) {
         response=response.then().statusCode(code).log().all().extract().response();
+
+    }
+
+    @Then("Response has a single entry with the name as {string}")
+    public void response_has_a_single_entry_with_the_name_as(String value) {
+        int count=0;
+        getMessagesclass=response.as(GetMessages.class);
+        List<Messages> getcount=getMessagesclass.getMessages();
+
+        for(int i=0; i<getcount.size();i++) {
+            if(getcount.get(i).getName().equals(value)) {
+                count++;
+            }
+
+        }
+        assertEquals(1, count);
+
+    }
+
+    @Then("Response has the {string} as {string}")
+    public void response_has_the_as(String key, String value)
+    {
+        stringResponse=response.asPrettyString();
+        JsonPath jp= new JsonPath(stringResponse);
+        capturedStringResponse=jp.get(key).toString();
+        assertEquals(capturedStringResponse,value);
 
     }
 
