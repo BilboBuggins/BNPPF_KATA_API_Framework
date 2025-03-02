@@ -16,6 +16,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import resources.Resource;
 import resources.TestDataBuilder;
 import resources.Utility;
 import io.restassured.path.json.JsonPath;
@@ -51,7 +52,6 @@ public class StepDefinition extends Utility{
     public void user_sends_body_as(String body) throws IOException {
         requestSpecification=requestSpecification.body(new String(Files.readAllBytes(Paths.get("src/main/java/body/"+body))));
     }
-
 
 
     @When("Using a {string} call with resources {string}")
