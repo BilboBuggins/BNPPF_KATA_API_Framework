@@ -27,6 +27,7 @@ public class StepDefinition extends Utility{
     private String stringResponse;
     private String capturedStringResponse;
     private GetMessages getMessagesclass;
+    private static String capturedResponse;
     TestDataBuilder testDataBuilder= new TestDataBuilder();
 
 
@@ -74,6 +75,13 @@ public class StepDefinition extends Utility{
         }
     }
 
+    @When("Using a get call with the captured resources id")
+    public void using_a_get_callwith_captured_resource_id() {
+
+        response=requestSpecification.when().get("/message/"+capturedResponse);
+    }
+
+
     @Then("User gets a {int} status code")
     public void user_gets_a_status_code(Integer code) {
         response=response.then().spec(responseSpecBuilder(code)).log().all().extract().response();
@@ -114,6 +122,17 @@ public class StepDefinition extends Utility{
         System.out.println(capturedStringResponse);
         capturedStringResponse.contains(value);
         assertEquals(capturedStringResponse,value);
+
+    }
+
+    @Then("User captures the {string}")
+    public void user_captures_the(String key)
+    {
+        stringResponse=response.asPrettyString();
+        JsonPath jp= new JsonPath(stringResponse);
+        capturedResponse=jp.get(key).toString();
+        System.out.println(capturedResponse);
+
 
     }
 
