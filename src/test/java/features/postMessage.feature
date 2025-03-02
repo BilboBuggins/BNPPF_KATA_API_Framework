@@ -13,7 +13,7 @@ Feature: Validate Post Message Apis
 
         Examples:
             |name		|email  		|description  							|phoneno  			|subject    |
-            |Test		|Testtcs@tcs.com|Query to book a room for a night		|+918765312261		|Query		|
+            |Test		|Test@testsite.com|Query to book a room for a night		|+918765312261		|Query		|
 
 
 
@@ -33,5 +33,5 @@ Feature: Validate Post Message Apis
 
         Examples:
             |name		|email  				|description  											|phoneno  				|subject    |error																			|
-            |				|Testtcs@tcs.com|Query to book a room for a night		|+918765312261		|Query			|[Name may not be blank]										|
+            |				|Test@testsite.com  |Query to book a room for a night		|+918765312261		|Query			|[Name may not be blank]										|
             |test		|								|Query to book a room for a night		|+918765312261		|Query			|[Email may not be blank]										|
