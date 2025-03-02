@@ -13,6 +13,21 @@ public class StepDefinition {
         requestSpecification=given().log().all().baseUri(string);
     }
 
+    @When("User sends headers as")
+    public void user_sends_headers_as(io.cucumber.datatable.DataTable dataTable) {
+        List<Map<String, String>> data=dataTable.asMaps(String.class, String.class);
+        for(Map<String, String> pairs:data) {
+            requestSpecification=requestSpecification.headers(pairs.get("Key"),pairs.get("Value"));
+        }
+    }
+
+    @When("User sends body as {string}")
+    public void user_sends_body_as(String body) throws IOException {
+        requestSpecification=requestSpecification.body(new String(Files.readAllBytes(Paths.get("src/main/java/body/"+body))));
+    }
+
+
+
     @When("Using a {string} call with resources {string}")
     public void using_a_call(String call, String resources) {
         if(call.equalsIgnoreCase("get")) {
