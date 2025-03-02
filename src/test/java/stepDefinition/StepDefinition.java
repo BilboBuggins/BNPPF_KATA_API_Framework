@@ -1,15 +1,22 @@
 package stepDefinition;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.Map;
+import static io.restassured.RestAssured.given;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 public class StepDefinition {
     private RequestSpecification requestSpecification;
     private Response response;
     @Given("User calls BaseURL {string}")
     public void user_calls_base_url(String baseurl)  {
 
-        requestSpecification=given().log().all().baseUri(string);
+        requestSpecification=given().log().all().baseUri(baseurl);
     }
 
     @When("User sends headers as")
@@ -48,7 +55,7 @@ public class StepDefinition {
 
     @Then("User gets a {int} status code")
     public void user_gets_a_status_code(Integer code) {
-        response=response.then().statusCode(statusCode).log().all().extract().response();
+        response=response.then().statusCode(code).log().all().extract().response();
 
     }
 
