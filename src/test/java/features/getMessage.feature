@@ -3,7 +3,7 @@ Feature: Validate Get Message Apis
 
   Scenario: Verify get Message Api has a particular entry using name
     Given User calls BaseURL
-    When Using a "get" call with resources "/message"
+    When Using a "get" call with resources "getMessageApi"
     Then User gets a 200 status code
     And Response has a single entry with the name as "James Dean"
 
@@ -12,7 +12,7 @@ Feature: Validate Get Message Apis
 
   Scenario: Verify get Message Api for a particular message id and validate email
     Given User calls BaseURL
-    When Using a "get" call with resources "/message/1"
+    When Using a "get" call with resources "getMessageApiWithId"
     Then User gets a 200 status code
     And Response has the "messageid" as "1"
 
@@ -22,6 +22,6 @@ Feature: Validate Get Message Apis
 
   Scenario: Verify get Message Api for the count of messages
     Given User calls BaseURL
-    When Using a "get" call with resources "/message/count"
+    When Using a "get" call with resources "getMessageApiwithCount"
     Then User gets a 200 status code
     And Response has the "count" as "4"

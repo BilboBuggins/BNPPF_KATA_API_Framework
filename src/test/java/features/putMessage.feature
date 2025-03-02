@@ -6,6 +6,6 @@ Feature: Validate Put Message Apis
         When User sends headers as
             |Key		|Value|
             |Accept	|*/*|
-        And Using a "put" call with resources "/message/1/read"
+        And Using a "put" call with resources "putMessageApi"
         Then User gets a 403 status code
     

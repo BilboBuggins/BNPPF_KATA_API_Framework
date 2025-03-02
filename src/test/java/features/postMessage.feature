@@ -7,7 +7,7 @@ Feature: Validate Post Message Apis
             |Key|Value|
             |Content-Type|application/json|
         When User sends post api with "<name>" "<email>" "<description>" "<phoneno>" "<subject>"
-        And Using a "post" call with resources "/message/"
+        And Using a "post" call with resources "postMessageApi"
         Then User gets a 201 status code
 
 
@@ -27,7 +27,7 @@ Feature: Validate Post Message Apis
             |Key|Value|
             |Content-Type|application/json|
         When User sends post api with "<name>" "<email>" "<description>" "<phoneno>" "<subject>"
-        And Using a "post" call with resources "/message/"
+        And Using a "post" call with resources "postMessageApi"
         Then User gets a 400 status code
         And Response has the correct error message "<error>"
 

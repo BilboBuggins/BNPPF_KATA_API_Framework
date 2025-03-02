@@ -6,5 +6,5 @@ Feature: Validate delete Message Apis
         When User sends headers as
             |Key		|Value|
             |Accept	|*/*	|
-        And Using a "delete" call with resources "/message/1"
+        And Using a "delete" call with resources "deleteMessageApi"
         Then User gets a 403 status code
