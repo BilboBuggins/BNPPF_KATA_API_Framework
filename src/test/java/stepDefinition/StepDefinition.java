@@ -6,7 +6,6 @@ import io.restassured.response.Response;
 public class StepDefinition {
     private RequestSpecification requestSpecification;
     private Response response;
-    private
     @Given("User calls BaseURL {string}")
     public void user_calls_base_url(String baseurl)  {
 
